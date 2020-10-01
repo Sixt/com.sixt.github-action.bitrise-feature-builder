@@ -28,7 +28,7 @@
   "author": "Sixt SE",
   "license": "MIT",
   "dependencies": {
-    "@actions/core": "^1.2.0",
+    "@actions/core": "^1.2.6",
     "@actions/github": "^2.1.0",
     "@octokit/webhooks": "^7.0.0",
     "@types/node": "^13.7.0",
