@@ -11,6 +11,12 @@ inputs:
   bitrise-slug:
     description: 'The slug of the application on Bitrise. You can find the slug by opening the Bitrise dashboard and copying the alphanumeric characters in the URL: https://app.bitrise.io/app/<all_slug>'
     required: true
+  bitrise-workflow:
+    description: 'The slug of the application on Bitrise. You can find the slug by opening the Bitrise dashboard and copying the alphanumeric characters in the URL: https://app.bitrise.io/app/<all_slug>'
+    required: true
+  trigger-phrase:
+    description: 'Token for Bitrise. Should be configured as secret in the repo and then passed using {{ secrets.BITRISE_TOKEN }}'
+    required: true
 runs:
   using: 'node12'
   main: 'lib/main.js'

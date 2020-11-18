@@ -8,6 +8,8 @@ export async function run(): Promise<void> {
     // Parse inputs from workflow yaml file
     const githubToken = core.getInput("github-token", {required: true})
     const bitriseToken = core.getInput("bitrise-token", {required: true})
+    const triggers = core.getInput("triggers", {required: true})
+    core.warning(`Triggers '${triggers}'`)
     const bitriseSlug = core.getInput("bitrise-slug", {required: true})
     const triggerPhrase = core.getInput("trigger-phrase", {required: true})
     const bitriseWorkflow = core.getInput("bitrise-workflow", {required: true})
