@@ -8,6 +8,8 @@ export async function run(): Promise<void> {
     // Parse inputs from workflow yaml file
     const githubToken = core.getInput("github-token", {required: true})
     const bitriseToken = core.getInput("bitrise-token", {required: true})
+    const triggers = core.getInput("triggers", {required: true})
+    core.warning(`Triggers '${triggers}'`)
     const bitriseSlug = core.getInput("bitrise-slug", {required: true})
     const triggerPhrase = core.getInput("trigger-phrase", {required: true})
     const bitriseWorkflow = core.getInput("bitrise-workflow", {required: true})
@@ -17,14 +19,14 @@ export async function run(): Promise<void> {
       return
     }
 
-    const issueCommentPayload = github.context.payload as Webhooks.WebhookPayloadIssueComment
+    const issueCommentPayload = github.context.payload as Webhooks.EventPayloads.WebhookPayloadIssueComment
     if (!issueCommentPayload.comment.body.startsWith(triggerPhrase)) {
       core.warning(`Issue comment does not start with trigger phrase '${triggerPhrase}'`)
       return
     }
 
     const issueNumber = issueCommentPayload.issue.number
-    const octokit = new github.GitHub(githubToken)
+    const octokit = github.getOctokit(githubToken)
     const pullRequest = await octokit.pulls.get({
       ...github.context.repo,
       pull_number: issueNumber,
